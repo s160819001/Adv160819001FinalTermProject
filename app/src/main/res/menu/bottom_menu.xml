@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemHome"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemBook"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="Book"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemThesis"
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:title="Thesis"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemProfile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile"
+        app:showAsAction="always" />
+</menu>

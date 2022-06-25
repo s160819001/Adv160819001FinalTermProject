@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/itemBook">
+    <fragment
+        android:id="@+id/itemBook"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.BookListFragment"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list" >
+        <action
+            android:id="@+id/actionCreateBook"
+            app:destination="@id/createBookFragment" />
+        <action
+            android:id="@+id/actionBookDetail"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createBookFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.CreateBookFragment"
+        android:label="CreateBookFragment" />
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.BookDetailFragment"
+        android:label="fragment_book_detail"
+        tools:layout="@layout/fragment_book_detail" >
+        <argument
+            android:name="isbn"
+            app:argType="string" />
+    </fragment>
+</navigation>
