@@ -8,7 +8,7 @@
             type="dk.ubaya.adv160819001finaltermproject.model.Book" />
         <variable
             name="listener"
-            type="dk.ubaya.adv160819001finaltermproject.view.CreateBookClickListener" />
+            type="dk.ubaya.adv160819001finaltermproject.view.BookSaveChangesListener" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_marginBottom="8dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
-                app:layout_constraintBottom_toTopOf="@id/btnAddBook"
+                app:layout_constraintBottom_toTopOf="@id/btnSaveBook"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -48,8 +48,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Year : "
-                            app:layout_constraintStart_toStartOf="@+id/textInputLayout7"
-                            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
+                            app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
+                            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
                         <TextView
                             android:id="@+id/textView11"
@@ -165,41 +165,37 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textInputLayout2"
+                            android:id="@+id/textInputLayout"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:hint="Location"
-                            app:hintAnimationEnabled="true"
                             app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
                             app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
                             app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/inputLocation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={book.location}" />
+                                android:text="@={book.location}"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textInputLayout7"
+                            android:id="@+id/textInputLayout8"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:hint="Image URL"
-                            app:hintAnimationEnabled="true"
-                            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-                            app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-                            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+                            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/inputImageURL"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={book.image}" />
+                                android:text="@={book.image}"/>
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </ScrollView>
@@ -207,14 +203,14 @@
             </androidx.cardview.widget.CardView>
 
             <Button
-                android:id="@+id/btnAddBook"
+                android:id="@+id/btnSaveBook"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="Add Book"
-                android:onClick="@{(view)->listener.onCreateBookClick(view,book)}"
+                android:text="Save Changes"
+                android:onClick="@{(v)->listener.onBookSaveChanges(v,book)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -8,17 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import dk.ubaya.adv160819001finaltermproject.R
+import dk.ubaya.adv160819001finaltermproject.databinding.FragmentCreateBookBinding
 import dk.ubaya.adv160819001finaltermproject.model.Book
 import dk.ubaya.adv160819001finaltermproject.viewmodel.BookDetailViewModel
 import kotlinx.android.synthetic.main.fragment_create_book.*
 
 
-class CreateBookFragment : Fragment() {
+class CreateBookFragment : Fragment(), CreateBookClickListener{
     private lateinit var viewModel: BookDetailViewModel
+    private lateinit var dataBinding:FragmentCreateBookBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,8 @@ class CreateBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_book, container, false)
+        dataBinding= DataBindingUtil.inflate<FragmentCreateBookBinding>(inflater,R.layout.fragment_create_book,container,false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,21 +43,14 @@ class CreateBookFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setTitle("Add Book")
         viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
 
-        btnAddBook.setOnClickListener {
-            Log.e("masuk","btnaddbook masuk sini")
-            var book= Book(inputISBN.text.toString(),inputTitle.text.toString(),inputAuthor.text.toString(),inputPublisher.text.toString(),inputYear.text.toString(),inputSynopsis.text.toString())
-            Log.e("book",book.toString())
-            viewModel.addBook(book)
-            Toast.makeText(view.context, "Book has added to database.", Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(it).popBackStack()
-        }
+        dataBinding.listener=this
 
+        dataBinding.book= Book("","","","","","","")
+    }
 
-//        viewModel.fetch(BookDetailFragmentArgs.fromBundle(requireArguments()).isbn.toString())
-
-        viewModel.bookLD.observe(viewLifecycleOwner, Observer{
-
-
-        })
+    override fun onCreateBookClick(v: View, obj: Book) {
+        viewModel.addBook(obj)
+        Toast.makeText(v.context, "Book has added to database.", Toast.LENGTH_SHORT).show()
+        Navigation.findNavController(v).popBackStack()
     }
 }

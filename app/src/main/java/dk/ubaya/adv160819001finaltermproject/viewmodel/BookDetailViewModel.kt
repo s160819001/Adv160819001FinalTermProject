@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import dk.ubaya.adv160819001finaltermproject.model.Book
 import dk.ubaya.adv160819001finaltermproject.model.LibraryDatabase
+import dk.ubaya.adv160819001finaltermproject.util.buildDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,16 +21,21 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
     fun addBook(book: Book){
 
         launch {
-            val db = Room.databaseBuilder(getApplication(), LibraryDatabase::class.java,"librarydb").build()
+            val db = buildDB(getApplication())
             db.bookDao().insertAllBook(book)
         }
     }
 
     fun fetch(isbn:String){
-        Log.e("masuk fetch","masuk ini")
         launch {
-            val db = Room.databaseBuilder(getApplication(), LibraryDatabase::class.java,"librarydb").build()
+            val db = buildDB(getApplication())
             bookLD.value=db.bookDao().selectBook(isbn)
+        }
+    }
+    fun update(title:String, author:String,publisher:String,year:String,synopsis:String,location:String,image:String, isbn:String) {
+        launch {
+            val db = buildDB(getApplication())
+            db.bookDao().update(title, author,publisher,year,synopsis, location, image, isbn)
         }
     }
 

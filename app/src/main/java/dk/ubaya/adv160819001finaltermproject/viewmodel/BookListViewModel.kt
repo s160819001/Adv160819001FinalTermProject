@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import dk.ubaya.adv160819001finaltermproject.model.Book
 import dk.ubaya.adv160819001finaltermproject.model.LibraryDatabase
+import dk.ubaya.adv160819001finaltermproject.util.buildDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,14 +24,14 @@ class BookListViewModel(application: Application): AndroidViewModel(application)
         loadingLD.value=true
 
         launch {
-            val db = Room.databaseBuilder(getApplication(), LibraryDatabase::class.java,"librarydb").build()
+            val db = buildDB(getApplication())
             booksLD.value=db.bookDao().selectAllBook()
         }
     }
 
     fun delete(book: Book){
         launch {
-            val db = Room.databaseBuilder(getApplication(),LibraryDatabase::class.java,"librarydb").build()
+            val db = buildDB(getApplication())
             db.bookDao().deleteBook(book)
             booksLD.value=db.bookDao().selectAllBook()
         }

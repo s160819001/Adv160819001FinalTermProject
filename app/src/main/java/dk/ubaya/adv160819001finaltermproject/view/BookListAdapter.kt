@@ -29,7 +29,6 @@ class BookListAdapter (val bookList:ArrayList<Book>): RecyclerView.Adapter<BookL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-//        val v = inflater.inflate(R.layout.book_list_item, parent, false)
         val v=DataBindingUtil.inflate<BookListItemBinding>(inflater,R.layout.book_list_item,parent,false)
         return BookViewHolder(v)
     }
@@ -37,14 +36,6 @@ class BookListAdapter (val bookList:ArrayList<Book>): RecyclerView.Adapter<BookL
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         holder.view.book = bookList[position]
         holder.view.listener = this
-//        holder.view.txtTitle.text = bookList[position].title
-//        holder.view.txtAuthor.text = bookList[position].author
-//        holder.view.txtPublisher.text = bookList[position].publisher
-//        holder.view.imageView.loadImage(bookList[position].image.toString(), holder.view.progressBar)
-//
-//        holder.view.cardView.setOnClickListener {
-////            Navigation.findNavController(it).navigate(BookListFragmentDirections.actionBookDetail(bookList[position].isbn.toString()))
-//        }
     }
 
     override fun getItemCount(): Int {
@@ -52,7 +43,6 @@ class BookListAdapter (val bookList:ArrayList<Book>): RecyclerView.Adapter<BookL
     }
 
     override fun onCardViewClick(v: View) {
-        Log.e("cek tag value",v.tag.toString())
         Navigation.findNavController(v).navigate(BookListFragmentDirections.actionBookDetail(v.tag.toString()))
     }
 

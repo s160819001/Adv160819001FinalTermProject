@@ -28,5 +28,16 @@
         <argument
             android:name="isbn"
             app:argType="string" />
+        <action
+            android:id="@+id/actionEditBook"
+            app:destination="@id/editBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBookFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.EditBookFragment"
+        android:label="EditBookFragment" >
+        <argument
+            android:name="isbn"
+            app:argType="string" />
     </fragment>
 </navigation>
