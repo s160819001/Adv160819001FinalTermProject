@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.2085" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/book_list_item.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_book_detail.xml" value="0.324310302734375" />
+        <entry key="app/src/main/res/layout/fragment_book_detail.xml" value="0.310546875" />
         <entry key="app/src/main/res/layout/fragment_book_list.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/fragment_create_book.xml" value="0.33668060302734376" />
         <entry key="app/src/main/res/layout/fragment_edit_book.xml" value="0.17442321777343747" />
+        <entry key="app/src/main/res/layout/fragment_more_book_detail.xml" value="0.25848083496093754" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.28229166666666666" />
       </map>

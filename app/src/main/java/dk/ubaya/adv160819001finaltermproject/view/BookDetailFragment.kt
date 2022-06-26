@@ -17,7 +17,7 @@ import dk.ubaya.adv160819001finaltermproject.model.Book
 import dk.ubaya.adv160819001finaltermproject.viewmodel.BookDetailViewModel
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 
-class BookDetailFragment : Fragment(),EditBookClickListener {
+class BookDetailFragment : Fragment(),EditBookClickListener, MoreBookClickListener{
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var dataBinding:FragmentBookDetailBinding
 
@@ -42,8 +42,8 @@ class BookDetailFragment : Fragment(),EditBookClickListener {
         viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
         viewModel.fetch(BookDetailFragmentArgs.fromBundle(requireArguments()).isbn)
         observeViewModel()
-        Log.e("tes","methodobservesudahdipanggil")
         dataBinding.editListener=this
+        dataBinding.listener=this
     }
 
     override fun onPause() {
@@ -59,11 +59,11 @@ class BookDetailFragment : Fragment(),EditBookClickListener {
     fun observeViewModel(){
         viewModel.bookLD.observe(viewLifecycleOwner, Observer{
             dataBinding.book=it
-            Log.e("tes",it.toString())
-//            btnFindBook.setOnClickListener {
-////                Navigation.findNavController(it).navigate(BookDetailFragmentDirections.actionLocationFragment(book.location.toString()))
-//            }
         })
-        Log.e("tes",dataBinding.book.toString())
+    }
+
+    override fun onMoreBookClick(v: View) {
+        Log.e("masuk","masukonmorebookclick")
+        Navigation.findNavController(v).navigate(BookDetailFragmentDirections.actionMore(v.tag.toString()))
     }
 }

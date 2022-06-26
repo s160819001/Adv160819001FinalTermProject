@@ -31,6 +31,9 @@
         <action
             android:id="@+id/actionEditBook"
             app:destination="@id/editBookFragment" />
+        <action
+            android:id="@+id/actionMore"
+            app:destination="@id/moreBookDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/editBookFragment"
@@ -40,4 +43,12 @@
             android:name="isbn"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/moreBookDetailFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.MoreBookDetailFragment"
+        android:label="MoreBookDetailFragment" >
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </dialog>
 </navigation>

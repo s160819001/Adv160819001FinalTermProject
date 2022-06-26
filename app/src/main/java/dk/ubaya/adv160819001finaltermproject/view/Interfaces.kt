@@ -9,10 +9,7 @@ interface CardViewClickListener{
 }
 
 interface CreateBookClickListener{
-    fun onCreateBookClick(v: View, obj:Book){
-        Log.e("tes", "oncreatebookclick dipanggil")
-        Log.e("tes",obj.toString())
-    }
+    fun onCreateBookClick(v: View, obj:Book)
 }
 
 interface BookSaveChangesListener{
@@ -23,6 +20,22 @@ interface EditBookClickListener{
     fun onEditBookClick(v:View,obj: Book)
 }
 
-interface FindBookClickListener{
-    fun onFindBookClick(v: View,obj: Book)
+interface MoreBookClickListener{
+    fun onMoreBookClick(v: View)
+}
+
+interface DeleteBookClickListener{
+    fun onDeleteBookClick(v: View,obj: Book)
+}
+
+interface RequestBookClickListener{
+    fun onRequestBookClick(v:View)
+}
+
+interface DateClickListener{
+    fun onDateClick(v:View)
+}
+
+interface TimeClickListener{
+    fun onTimeClick(v:View)
 }
