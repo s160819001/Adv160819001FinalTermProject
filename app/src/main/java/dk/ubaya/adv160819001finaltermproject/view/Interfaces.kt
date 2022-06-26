@@ -3,6 +3,7 @@ package dk.ubaya.adv160819001finaltermproject.view
 import android.util.Log
 import android.view.View
 import dk.ubaya.adv160819001finaltermproject.model.Book
+import dk.ubaya.adv160819001finaltermproject.model.User
 
 interface CardViewClickListener{
     fun onCardViewClick(v:View)
@@ -38,4 +39,16 @@ interface DateClickListener{
 
 interface TimeClickListener{
     fun onTimeClick(v:View)
+}
+
+interface RegisterClickListener{
+    fun onRegisterClick(v:View, obj:User)
+}
+
+interface LoginClickListener{
+    fun onLoginClick(v:View, obj:User)
+}
+
+interface RegisterInLoginClickListener{
+    fun onRegisterInLoginClick(v:View)
 }

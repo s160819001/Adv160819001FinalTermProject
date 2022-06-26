@@ -2,6 +2,7 @@ package dk.ubaya.adv160819001finaltermproject.util
 
 import android.content.Context
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.databinding.BindingAdapter
 import android.widget.ImageView

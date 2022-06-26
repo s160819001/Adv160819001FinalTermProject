@@ -135,7 +135,7 @@
                                 style="o"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={book.isbn}" />
+                                android:text="@{book.isbn}" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <EditText

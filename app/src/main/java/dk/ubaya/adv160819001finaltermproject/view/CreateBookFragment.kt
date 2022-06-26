@@ -42,7 +42,6 @@ class CreateBookFragment : Fragment(), CreateBookClickListener{
 
         (activity as AppCompatActivity).supportActionBar?.setTitle("Add Book")
         viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
-
         dataBinding.listener=this
 
         dataBinding.book= Book("","","","","","","")
