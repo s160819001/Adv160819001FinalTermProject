@@ -25,7 +25,7 @@ class UserViewModel(application: Application): AndroidViewModel(application), Co
         }
     }
 
-    fun fetch(user:User){
+    fun check(user:User){
         launch {
             val db = buildDB(getApplication())
             val userFromDB=db.userDao().selectUser(user.email)
@@ -34,6 +34,12 @@ class UserViewModel(application: Application): AndroidViewModel(application), Co
             }else{
                 userLD.value=User("!@#$%^&*()_","!@#$%^&*()_","!@#$%^&*()_")
             }
+        }
+    }
+    fun fetch(email: String){
+        launch {
+            val db = buildDB(getApplication())
+            userLD.value=db.userDao().selectUser(email)
         }
     }
     fun update(name:String,email:String,password:String) {

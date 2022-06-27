@@ -11,7 +11,7 @@ import dk.ubaya.adv160819001finaltermproject.databinding.BookListItemBinding
 import dk.ubaya.adv160819001finaltermproject.databinding.ThesisListItemBinding
 import dk.ubaya.adv160819001finaltermproject.model.Thesis
 
-class ThesisListAdapter(val thesisList:ArrayList<Thesis>): RecyclerView.Adapter<ThesisListAdapter.ThesisViewHolder>() {
+class ThesisListAdapter(val thesisList:ArrayList<Thesis>): RecyclerView.Adapter<ThesisListAdapter.ThesisViewHolder>(),ThesisCardViewClickListener {
     class ThesisViewHolder(var view: ThesisListItemBinding) : RecyclerView.ViewHolder(view.root)
 
     fun updateThesisList(newThesisList: List<Thesis>) {
@@ -28,16 +28,15 @@ class ThesisListAdapter(val thesisList:ArrayList<Thesis>): RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ThesisViewHolder, position: Int) {
         holder.view.thesis=thesisList[position]
-//        holder.view.txtTitleThesis.text = thesisList[position].title
-//        holder.view.txtAuthorThesis.text = thesisList[position].author
-//        holder.view.txtYearThesis.text = thesisList[position].year
-//
-//        holder.view.cardViewThesis.setOnClickListener {
-//            Navigation.findNavController(it).navigate(ThesisListFragmentDirections.actionThesisDetail(thesisList[position].id.toString(),thesisList[position].year.toString()))
-        }
+        holder.view.listener=this
+    }
 
     override fun getItemCount(): Int {
         return thesisList.size
+    }
+
+    override fun onThesisCardViewClick(v: View, obj: Thesis) {
+        Navigation.findNavController(v).navigate(ThesisListFragmentDirections.actionThesisDetail(obj.id,obj.year))
     }
 
 }

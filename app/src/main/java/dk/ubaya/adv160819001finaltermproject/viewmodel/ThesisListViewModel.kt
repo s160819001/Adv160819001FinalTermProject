@@ -29,6 +29,24 @@ class ThesisListViewModel(application: Application): AndroidViewModel(applicatio
             db.thesisDao().insertAllThesis(thesis)
         }
     }
+    fun fetch(id:String){
+        launch {
+            val db = buildDB(getApplication())
+            thesisLD.value= listOf(db.thesisDao().selectThesis(id))
+        }
+    }
+    fun delete(thesis: Thesis){
+        launch {
+            val db = buildDB(getApplication())
+            db.thesisDao().deleteThesis(thesis)
+        }
+    }
+    fun update(title:String, author:String,year:String,id:String) {
+        launch {
+            val db = buildDB(getApplication())
+            db.thesisDao().update(title, author, year,id)
+        }
+    }
 
     override val coroutineContext: CoroutineContext
         get() = job+ Dispatchers.Main

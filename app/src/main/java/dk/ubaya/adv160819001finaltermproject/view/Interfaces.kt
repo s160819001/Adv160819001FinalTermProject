@@ -10,6 +10,10 @@ interface CardViewClickListener{
     fun onCardViewClick(v:View)
 }
 
+interface AddBookClickListener{
+    fun onAddBookClick(v: View)
+}
+
 interface CreateBookClickListener{
     fun onCreateBookClick(v: View, obj:Book)
 }
@@ -60,4 +64,40 @@ interface CreateThesisClickListener{
 
 interface AddThesisClickListener{
     fun onAddThesisClick(v: View)
+}
+
+interface RefreshLayoutBookListener{
+    fun onRefreshLayoutBook(v:View)
+}
+
+interface ThesisCardViewClickListener{
+    fun onThesisCardViewClick(v:View,obj: Thesis)
+}
+
+interface EditThesisClickListener{
+    fun onEditThesisClick(v:View,obj: Thesis)
+}
+
+interface ThesisSaveChangesListener{
+    fun onThesisSaveChanges(v: View, obj:Thesis)
+}
+
+interface DeleteThesisClickListener{
+    fun onDeleteThesisClick(v: View,obj: Thesis)
+}
+
+interface EditUserClickListener{
+    fun onEditUserClick(v:View,obj: User)
+}
+
+interface UserSaveChangesListener{
+    fun onUserSaveChanges(v: View, obj:User)
+}
+
+interface LogoutClickListener{
+    fun onLogoutClick(v:View)
+}
+
+interface SwitchDarkClickListener{
+    fun onSwitchDarkClick(v:View, mode:Boolean)
 }

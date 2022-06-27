@@ -2,6 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="listener"
+            type="dk.ubaya.adv160819001finaltermproject.view.AddBookClickListener" />
+        <variable
+            name="adapter"
+            type="dk.ubaya.adv160819001finaltermproject.view.BookListAdapter" />
+        <variable
+            name="refreshLayoutListener"
+            type="dk.ubaya.adv160819001finaltermproject.view.RefreshLayoutBookListener" />
+        <variable
+            name="recViewVisibility"
+            type="Integer" />
+    </data>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,6 +25,7 @@
             android:id="@+id/refreshLayoutBook"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="@{refreshLayoutListener::onRefreshLayoutBook}"
             tools:context=".view.StudentListFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +36,8 @@
                     android:id="@+id/recView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:adapter="@{adapter}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +71,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:clickable="true"
+                    android:onClick="@{listener::onAddBookClick}"
                     android:src="@drawable/ic_baseline_add_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />

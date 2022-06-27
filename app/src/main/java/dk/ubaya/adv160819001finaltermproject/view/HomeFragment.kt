@@ -1,33 +1,33 @@
 package dk.ubaya.adv160819001finaltermproject.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import dk.ubaya.adv160819001finaltermproject.R
+import dk.ubaya.adv160819001finaltermproject.databinding.FragmentCreateBookBinding
+import dk.ubaya.adv160819001finaltermproject.databinding.FragmentHomeBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private lateinit var dataBinding:FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        val navHostFragment = (activity as FragmentActivity).supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment
+//        val navController = navHostFragment.navController
+//        NavigationUI.setupActionBarWithNavController((activity as AppCompatActivity), navController, drawerLayout)
+//        NavigationUI.setupWithNavController((activity as AppCompatActivity).navView, navController)
+//        (activity as AppCompatActivity).bottomNav.setupWithNavController(navController)
     }
 
     override fun onCreateView(
@@ -35,26 +35,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        dataBinding= DataBindingUtil.inflate<FragmentHomeBinding>(inflater,R.layout.fragment_home,container,false)
+        return dataBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.setTitle("Home")
+        (activity as AppCompatActivity).bottomNav.visibility= View.VISIBLE
+        (activity as AppCompatActivity).buttonLogout.visibility=View.VISIBLE
+        dataBinding.mainimage="https://ubaya.fun/native/160819001/anmp/img/ubayalibrary.jpg"
+        dataBinding.newsimage="https://ubaya.fun/native/160819001/anmp/img/news-1.jpg"
     }
+
+
 }

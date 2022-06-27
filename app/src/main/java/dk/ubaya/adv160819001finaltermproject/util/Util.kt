@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -21,7 +23,7 @@ fun buildDB(context: Context):LibraryDatabase{
 }
 
 @BindingAdapter("android:imageUrl","android:progressBar")
-fun bindImage(view: ImageView,url:String,pb:ProgressBar){
+fun bindImage(view: ImageView,url:String,pb:ProgressBar?){
     Log.e("bindingadapter","masuk")
     Picasso.get()
         .load(url)
@@ -30,11 +32,18 @@ fun bindImage(view: ImageView,url:String,pb:ProgressBar){
         .error(R.drawable.ic_baseline_error_24)
         .into(view,object :Callback{
             override fun onSuccess() {
-                pb.visibility=View.GONE
+                pb?.visibility=View.GONE
             }
 
             override fun onError(e: Exception?) {
             }
 
         })
+}
+
+@BindingAdapter("android:url")
+fun setWebView(wv:WebView, url:String){
+    wv.webViewClient= WebViewClient()
+    wv.loadUrl(url)
+    wv.settings.javaScriptEnabled=true
 }

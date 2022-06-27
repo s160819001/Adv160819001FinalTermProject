@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -50,32 +51,29 @@ class ThesisListFragment : Fragment(),AddThesisClickListener {
         (activity as AppCompatActivity).supportActionBar?.setTitle("List of thesis")
         viewModelThesis = ViewModelProvider(this).get(ThesisListViewModel::class.java)
         viewModelThesis.refresh()
-        recyclerView2022.layoutManager = LinearLayoutManager(context,
-            LinearLayoutManager.HORIZONTAL,false)
-        recyclerView2022.adapter = thesisListAdapter2022
 
-        recyclerView2021.layoutManager = LinearLayoutManager(context,
-            LinearLayoutManager.HORIZONTAL,false)
-        recyclerView2021.adapter = thesisListAdapter2021
+//        dataBinding.orientation=LinearLayoutManager.HORIZONTAL
+        dataBinding.adapter2022 = thesisListAdapter2022
+//        dataBinding.orientation=LinearLayoutManager.HORIZONTAL
+        dataBinding.adapter2021 = thesisListAdapter2021
+//        dataBinding.orientation=LinearLayoutManager.HORIZONTAL
+        dataBinding.adapter2020 = thesisListAdapter2020
 
-        recyclerView2020.layoutManager = LinearLayoutManager(context,
-            LinearLayoutManager.HORIZONTAL,false)
-        recyclerView2020.adapter = thesisListAdapter2020
 
-        refreshLayoutThesis.setOnRefreshListener {
-            recyclerView2022.visibility = View.GONE
-            txtErrorThesis2022.visibility = View.GONE
-            progressLoadThesis2022.visibility = View.VISIBLE
-            recyclerView2021.visibility = View.GONE
-            txtErrorThesis2021.visibility = View.GONE
-            progressLoadThesis2021.visibility = View.VISIBLE
-            recyclerView2020.visibility = View.GONE
-            txtErrorThesis2020.visibility = View.GONE
-            progressLoadThesis2020.visibility = View.VISIBLE
-
-            viewModelThesis.refresh()
-            refreshLayoutThesis.isRefreshing = false
-        }
+//        refreshLayoutThesis.setOnRefreshListener {
+//            recyclerView2022.visibility = View.GONE
+//            txtErrorThesis2022.visibility = View.GONE
+//            progressLoadThesis2022.visibility = View.VISIBLE
+//            recyclerView2021.visibility = View.GONE
+//            txtErrorThesis2021.visibility = View.GONE
+//            progressLoadThesis2021.visibility = View.VISIBLE
+//            recyclerView2020.visibility = View.GONE
+//            txtErrorThesis2020.visibility = View.GONE
+//            progressLoadThesis2020.visibility = View.VISIBLE
+//
+//            viewModelThesis.refresh()
+//            refreshLayoutThesis.isRefreshing = false
+//        }
         dataBinding.addThesislistener=this
         observeViewModel()
     }

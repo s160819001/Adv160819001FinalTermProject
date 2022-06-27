@@ -18,9 +18,9 @@ data class Book(
 @Entity(tableName = "thesis_table")
 data class Thesis(
     @PrimaryKey var id:String,
-    var title:String?,
-    var author: String?,
-    var year: String?
+    var title:String,
+    var author: String,
+    var year: String
 )
 
 @Entity(tableName = "user_table")

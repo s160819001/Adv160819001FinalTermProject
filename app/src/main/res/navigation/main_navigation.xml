@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/itemHome">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/itemBook"
         android:name="dk.ubaya.adv160819001finaltermproject.view.BookListFragment"
@@ -55,12 +55,7 @@
         android:id="@+id/itemHome"
         android:name="dk.ubaya.adv160819001finaltermproject.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="dk.ubaya.adv160819001finaltermproject.view.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_home" >
         <argument
             android:name="email"
             app:argType="string" />
@@ -69,13 +64,21 @@
             app:argType="string" />
     </fragment>
     <fragment
+        android:id="@+id/itemProfile"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/actionEditProfile"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/registerFragment"
         android:name="dk.ubaya.adv160819001finaltermproject.view.RegisterFragment"
         android:label="RegisterFragment">
         <action
             android:id="@+id/actionRegister"
-            app:destination="@id/profileFragment"
-            app:popUpToInclusive="false" />
+            app:destination="@id/itemHome" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -86,9 +89,7 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/actionLogin"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/itemHome" />
     </fragment>
     <fragment
         android:id="@+id/itemThesis"
@@ -97,9 +98,47 @@
         <action
             android:id="@+id/actionCreateThesis"
             app:destination="@id/createThesisFragment" />
+        <action
+            android:id="@+id/actionThesisDetail"
+            app:destination="@id/thesisDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/createThesisFragment"
         android:name="dk.ubaya.adv160819001finaltermproject.view.CreateThesisFragment"
         android:label="CreateThesisFragment" />
+    <fragment
+        android:id="@+id/thesisDetailFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.ThesisDetailFragment"
+        android:label="fragment_thesis_detail"
+        tools:layout="@layout/fragment_thesis_detail" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="year"
+            app:argType="string" />
+        <action
+            android:id="@+id/actioneEditThesis"
+            app:destination="@id/editThesisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editThesisFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.EditThesisFragment"
+        android:label="EditThesisFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemSettings"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

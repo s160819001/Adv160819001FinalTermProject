@@ -19,7 +19,7 @@ import dk.ubaya.adv160819001finaltermproject.viewmodel.BookListViewModel
 import kotlinx.android.synthetic.main.fragment_book_list.*
 
 
-class BookListFragment : Fragment() {
+class BookListFragment : Fragment(),AddBookClickListener,RefreshLayoutBookListener {
     private lateinit var viewModelBook: BookListViewModel
     private lateinit var dataBinding: FragmentBookListBinding
     private val bookListAdapter:BookListAdapter  = BookListAdapter(arrayListOf())
@@ -40,8 +40,11 @@ class BookListFragment : Fragment() {
         viewModelBook = ViewModelProvider(this).get(BookListViewModel::class.java)
         viewModelBook.refresh()
 
-        recView.layoutManager = LinearLayoutManager(context)
-        recView.adapter = bookListAdapter
+//        recView.layoutManager = LinearLayoutManager(context)
+//        recView.adapter = bookListAdapter
+        dataBinding.adapter=bookListAdapter
+        dataBinding.listener=this
+        dataBinding.refreshLayoutListener=this
 
         refreshLayoutBook.setOnRefreshListener {
             recView.visibility = View.GONE
@@ -50,11 +53,6 @@ class BookListFragment : Fragment() {
             viewModelBook.refresh()
             refreshLayoutBook.isRefreshing = false
         }
-
-        fabAddBook.setOnClickListener {
-            Navigation.findNavController(it).navigate(BookListFragmentDirections.actionCreateBook())
-        }
-
         observeViewModel()
     }
 
@@ -76,5 +74,13 @@ class BookListFragment : Fragment() {
                 recView.visibility = View.GONE
             }
         })
+    }
+
+    override fun onAddBookClick(v: View) {
+        Navigation.findNavController(v).navigate(BookListFragmentDirections.actionCreateBook())
+    }
+
+    override fun onRefreshLayoutBook(v: View) {
+
     }
 }

@@ -32,10 +32,18 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
             bookLD.value=db.bookDao().selectBook(isbn)
         }
     }
+
     fun update(title:String, author:String,publisher:String,year:String,synopsis:String,location:String,image:String, isbn:String) {
         launch {
             val db = buildDB(getApplication())
             db.bookDao().update(title, author,publisher,year,synopsis, location, image, isbn)
+        }
+    }
+
+    fun delete(book: Book){
+        launch {
+            val db = buildDB(getApplication())
+            db.bookDao().deleteBook(book)
         }
     }
 

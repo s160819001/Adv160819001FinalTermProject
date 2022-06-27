@@ -1,6 +1,7 @@
 package dk.ubaya.adv160819001finaltermproject.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import dk.ubaya.adv160819001finaltermproject.R
 import dk.ubaya.adv160819001finaltermproject.databinding.FragmentProfileBinding
 import dk.ubaya.adv160819001finaltermproject.model.User
+import dk.ubaya.adv160819001finaltermproject.util.GlobalData
 import dk.ubaya.adv160819001finaltermproject.viewmodel.UserViewModel
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(),EditUserClickListener {
     private lateinit var viewModel: UserViewModel
     private lateinit var dataBinding: FragmentProfileBinding
 
@@ -38,14 +41,21 @@ class ProfileFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.setTitle("Profile")
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        viewModel.fetch(User(ProfileFragmentArgs.fromBundle(requireArguments()).email,"",ProfileFragmentArgs.fromBundle(requireArguments()).password))
+//        viewModel.fetch(User(ProfileFragmentArgs.fromBundle(requireArguments()).email,"",ProfileFragmentArgs.fromBundle(requireArguments()).password))
+//        viewModel.fetch()
+        viewModel.userLD.value=GlobalData.user
 
+        dataBinding.listener=this
         viewModel.userLD.observe(viewLifecycleOwner, Observer{
-            if(it==User("!@#$%^&*()_","!@#$%^&*()_","!@#$%^&*()_")){
-                Navigation.findNavController(view).popBackStack()
-            }else{
-                dataBinding.user=it
-            }
+            dataBinding.user=it
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dataBinding.user=User("","","")
+    }
+    override fun onEditUserClick(v: View, obj: User) {
+        Navigation.findNavController(v).navigate(ProfileFragmentDirections.actionEditProfile(obj.email))
     }
 }

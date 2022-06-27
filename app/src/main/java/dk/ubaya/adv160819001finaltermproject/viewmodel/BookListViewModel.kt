@@ -29,14 +29,6 @@ class BookListViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    fun delete(book: Book){
-        launch {
-            val db = buildDB(getApplication())
-            db.bookDao().deleteBook(book)
-            booksLD.value=db.bookDao().selectAllBook()
-        }
-    }
-
     override val coroutineContext: CoroutineContext
         get() = job+ Dispatchers.Main
 }

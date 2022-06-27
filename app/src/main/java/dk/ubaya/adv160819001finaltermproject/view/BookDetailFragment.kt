@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -17,7 +18,7 @@ import dk.ubaya.adv160819001finaltermproject.model.Book
 import dk.ubaya.adv160819001finaltermproject.viewmodel.BookDetailViewModel
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 
-class BookDetailFragment : Fragment(),EditBookClickListener, MoreBookClickListener{
+class BookDetailFragment : Fragment(),EditBookClickListener, MoreBookClickListener, DeleteBookClickListener{
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var dataBinding:FragmentBookDetailBinding
 
@@ -44,6 +45,7 @@ class BookDetailFragment : Fragment(),EditBookClickListener, MoreBookClickListen
         observeViewModel()
         dataBinding.editListener=this
         dataBinding.listener=this
+        dataBinding.deleteListener=this
     }
 
     override fun onPause() {
@@ -63,7 +65,12 @@ class BookDetailFragment : Fragment(),EditBookClickListener, MoreBookClickListen
     }
 
     override fun onMoreBookClick(v: View) {
-        Log.e("masuk","masukonmorebookclick")
         Navigation.findNavController(v).navigate(BookDetailFragmentDirections.actionMore(v.tag.toString()))
+    }
+
+    override fun onDeleteBookClick(v: View, obj: Book) {
+        viewModel.delete(obj)
+        Toast.makeText(v.context, "Book has deleted.", Toast.LENGTH_SHORT).show()
+        Navigation.findNavController(v).popBackStack()
     }
 }
