@@ -3,13 +3,16 @@ package dk.ubaya.adv160819001finaltermproject.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import dk.ubaya.adv160819001finaltermproject.R
+import dk.ubaya.adv160819001finaltermproject.databinding.BookListItemBinding
+import dk.ubaya.adv160819001finaltermproject.databinding.ThesisListItemBinding
 import dk.ubaya.adv160819001finaltermproject.model.Thesis
 
 class ThesisListAdapter(val thesisList:ArrayList<Thesis>): RecyclerView.Adapter<ThesisListAdapter.ThesisViewHolder>() {
-    class ThesisViewHolder(var view: View) : RecyclerView.ViewHolder(view)
+    class ThesisViewHolder(var view: ThesisListItemBinding) : RecyclerView.ViewHolder(view.root)
 
     fun updateThesisList(newThesisList: List<Thesis>) {
         thesisList.clear()
@@ -19,11 +22,12 @@ class ThesisListAdapter(val thesisList:ArrayList<Thesis>): RecyclerView.Adapter<
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThesisViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.thesis_list_item, parent, false)
+        val v= DataBindingUtil.inflate<ThesisListItemBinding>(inflater,R.layout.thesis_list_item,parent,false)
         return ThesisViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: ThesisViewHolder, position: Int) {
+        holder.view.thesis=thesisList[position]
 //        holder.view.txtTitleThesis.text = thesisList[position].title
 //        holder.view.txtAuthorThesis.text = thesisList[position].author
 //        holder.view.txtYearThesis.text = thesisList[position].year
@@ -33,7 +37,7 @@ class ThesisListAdapter(val thesisList:ArrayList<Thesis>): RecyclerView.Adapter<
         }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return thesisList.size
     }
 
 }

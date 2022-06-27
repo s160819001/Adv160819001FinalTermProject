@@ -3,6 +3,7 @@ package dk.ubaya.adv160819001finaltermproject.view
 import android.util.Log
 import android.view.View
 import dk.ubaya.adv160819001finaltermproject.model.Book
+import dk.ubaya.adv160819001finaltermproject.model.Thesis
 import dk.ubaya.adv160819001finaltermproject.model.User
 
 interface CardViewClickListener{
@@ -51,4 +52,12 @@ interface LoginClickListener{
 
 interface RegisterInLoginClickListener{
     fun onRegisterInLoginClick(v:View)
+}
+
+interface CreateThesisClickListener{
+    fun onCreateThesisClick(v: View, obj:Thesis)
+}
+
+interface AddThesisClickListener{
+    fun onAddThesisClick(v: View)
 }

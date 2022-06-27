@@ -78,9 +78,9 @@
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/itemProfile"
+        android:id="@+id/loginFragment"
         android:name="dk.ubaya.adv160819001finaltermproject.view.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/actionRegister"
             app:destination="@id/registerFragment" />
@@ -90,4 +90,16 @@
             app:popUpTo="@id/profileFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/itemThesis"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.ThesisListFragment"
+        android:label="ThesisListFragment" >
+        <action
+            android:id="@+id/actionCreateThesis"
+            app:destination="@id/createThesisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createThesisFragment"
+        android:name="dk.ubaya.adv160819001finaltermproject.view.CreateThesisFragment"
+        android:label="CreateThesisFragment" />
 </navigation>
