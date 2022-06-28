@@ -1,5 +1,6 @@
 package dk.ubaya.adv160819001finaltermproject.view
 
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -16,10 +18,14 @@ import androidx.navigation.ui.setupWithNavController
 import dk.ubaya.adv160819001finaltermproject.R
 import dk.ubaya.adv160819001finaltermproject.databinding.FragmentCreateBookBinding
 import dk.ubaya.adv160819001finaltermproject.databinding.FragmentHomeBinding
+import dk.ubaya.adv160819001finaltermproject.model.UserLogin
+import dk.ubaya.adv160819001finaltermproject.viewmodel.UserLogViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeFragment : Fragment() {
+//    private lateinit var viewModelUserLog: UserLogViewModel
     private lateinit var dataBinding:FragmentHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -44,6 +50,8 @@ class HomeFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setTitle("Home")
         (activity as AppCompatActivity).bottomNav.visibility= View.VISIBLE
         (activity as AppCompatActivity).buttonLogout.visibility=View.VISIBLE
+//        viewModelUserLog= ViewModelProvider(this).get(UserLogViewModel::class.java)
+//        viewModelUserLog.addLog(UserLogin(HomeFragmentArgs.fromBundle(requireArguments()).email))
         dataBinding.mainimage="https://ubaya.fun/native/160819001/anmp/img/ubayalibrary.jpg"
         dataBinding.newsimage="https://ubaya.fun/native/160819001/anmp/img/news-1.jpg"
     }

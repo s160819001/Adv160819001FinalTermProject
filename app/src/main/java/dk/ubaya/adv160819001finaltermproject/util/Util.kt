@@ -10,6 +10,8 @@ import androidx.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import dk.ubaya.adv160819001finaltermproject.R
@@ -18,8 +20,16 @@ import java.lang.Exception
 val DB_NAME="librarydb"
 
 fun buildDB(context: Context):LibraryDatabase{
-    val db = Room.databaseBuilder(context, LibraryDatabase::class.java, DB_NAME).build()
+    val db = Room.databaseBuilder(context, LibraryDatabase::class.java, DB_NAME)
+        .addMigrations(MIGRATION_1_2)
+        .build()
     return db
+}
+
+val MIGRATION_1_2 = object :Migration(1,2){
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE user_log_table ADD COLUMN timestamp TEXT DEFAULT null")
+    }
 }
 
 @BindingAdapter("android:imageUrl","android:progressBar")

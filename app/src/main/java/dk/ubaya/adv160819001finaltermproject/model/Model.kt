@@ -1,5 +1,6 @@
 package dk.ubaya.adv160819001finaltermproject.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -29,3 +30,12 @@ data class User(
     var name:String,
     var password:String
 )
+
+@Entity(tableName = "user_log_table")
+data class UserLogin(
+    var email:String,
+    var timestamp:String?=System.currentTimeMillis().toString()
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}

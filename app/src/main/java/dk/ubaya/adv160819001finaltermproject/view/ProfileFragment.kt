@@ -1,7 +1,6 @@
 package dk.ubaya.adv160819001finaltermproject.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import dk.ubaya.adv160819001finaltermproject.R
 import dk.ubaya.adv160819001finaltermproject.databinding.FragmentProfileBinding
 import dk.ubaya.adv160819001finaltermproject.model.User
-import dk.ubaya.adv160819001finaltermproject.util.GlobalData
+import dk.ubaya.adv160819001finaltermproject.viewmodel.UserLogViewModel
 import dk.ubaya.adv160819001finaltermproject.viewmodel.UserViewModel
 
 class ProfileFragment : Fragment(),EditUserClickListener {
     private lateinit var viewModel: UserViewModel
+    private lateinit var viewModelUserLog:UserLogViewModel
     private lateinit var dataBinding: FragmentProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +40,21 @@ class ProfileFragment : Fragment(),EditUserClickListener {
 
         (activity as AppCompatActivity).supportActionBar?.setTitle("Profile")
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        viewModelUserLog = ViewModelProvider(this).get(UserLogViewModel::class.java)
 //        viewModel.fetch(User(ProfileFragmentArgs.fromBundle(requireArguments()).email,"",ProfileFragmentArgs.fromBundle(requireArguments()).password))
 //        viewModel.fetch()
-        viewModel.userLD.value=GlobalData.user
+        viewModelUserLog.fetch()
 
         dataBinding.listener=this
+
+        viewModelUserLog.userLogLD.observe(viewLifecycleOwner, Observer{
+            viewModel.fetch(it.email)
+        })
+
         viewModel.userLD.observe(viewLifecycleOwner, Observer{
             dataBinding.user=it
         })
+
     }
 
     override fun onPause() {

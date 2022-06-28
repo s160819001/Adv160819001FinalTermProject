@@ -1,36 +1,29 @@
 package dk.ubaya.adv160819001finaltermproject.view
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import dk.ubaya.adv160819001finaltermproject.R
 import dk.ubaya.adv160819001finaltermproject.databinding.FragmentLoginBinding
-import dk.ubaya.adv160819001finaltermproject.databinding.FragmentRegisterBinding
 import dk.ubaya.adv160819001finaltermproject.model.User
-import dk.ubaya.adv160819001finaltermproject.util.GlobalData
+import dk.ubaya.adv160819001finaltermproject.model.UserLogin
+import dk.ubaya.adv160819001finaltermproject.viewmodel.UserLogViewModel
 import dk.ubaya.adv160819001finaltermproject.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class LoginFragment : Fragment(),RegisterInLoginClickListener,LoginClickListener {
     private lateinit var viewModel:UserViewModel
+    private lateinit var viewModelUserLog:UserLogViewModel
    private lateinit var dataBinding:FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +45,7 @@ class LoginFragment : Fragment(),RegisterInLoginClickListener,LoginClickListener
         (activity as AppCompatActivity).bottomNav.visibility=View.INVISIBLE
         (activity as AppCompatActivity).supportActionBar?.setTitle("Login")
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        viewModelUserLog=ViewModelProvider(this).get(UserLogViewModel::class.java)
         dataBinding.user= User("","","")
         dataBinding.registerlistener=this
         dataBinding.loginlistener=this
@@ -64,8 +58,8 @@ class LoginFragment : Fragment(),RegisterInLoginClickListener,LoginClickListener
             Log.e("observe",it.toString())
             if (it.email==obj.email && it.password==obj.password){
                 Log.e("elseif",viewModel.userLD.value.toString())
-                GlobalData.user=it
-                Navigation.findNavController(v).navigate(LoginFragmentDirections.actionLogin(obj.email,obj.password))
+                viewModelUserLog.addLog(UserLogin(it.email))
+                Navigation.findNavController(v).navigate(LoginFragmentDirections.actionLogin())
                 Navigation.findNavController(v).graph.setStartDestination(findNavController().currentDestination!!.id)
             }else if(it==User("!@#$%^&*()_","!@#$%^&*()_","!@#$%^&*()_")){
                 Toast.makeText(v.context,"Email or Password incorrect!", Toast.LENGTH_SHORT).show()

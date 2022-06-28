@@ -55,14 +55,7 @@
         android:id="@+id/itemHome"
         android:name="dk.ubaya.adv160819001finaltermproject.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <argument
-            android:name="email"
-            app:argType="string" />
-        <argument
-            android:name="password"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/itemProfile"
         android:name="dk.ubaya.adv160819001finaltermproject.view.ProfileFragment"
